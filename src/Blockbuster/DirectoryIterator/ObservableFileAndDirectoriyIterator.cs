@@ -13,13 +13,13 @@ namespace Blockbuster.DirectoryIterator
 		{
 			DirectoryInfo entry = new DirectoryInfo(directoryFullName);
 
-            //Create a new data stream of FileSystemEntities (becoming our core data stream)
+			//Create a new data stream of FileSystemEntities (becoming our core data stream)
 			var observableFileSystemEntities = Observable.Empty<FileSystemEntity>();
 
 			//Create a new data stream of DirectoryInfos from the command root directory
-            var observableDirectories = entry.EnumerateDirectories("*", SearchOption.AllDirectories).ToObservable();
+			var observableDirectories = entry.EnumerateDirectories("*", SearchOption.AllDirectories).ToObservable();
 
-            //Create a new data stream of FileSystemEntities based on the files laying inside the command root top level directory 
+			//Create a new data stream of FileSystemEntities based on the files laying inside the command root top level directory 
 			var observableFirstLevelFiles = entry.EnumerateFiles("*", SearchOption.TopDirectoryOnly)
 												.ToObservable()
 												.Select(x => new FileSystemEntity(x));
@@ -27,16 +27,16 @@ namespace Blockbuster.DirectoryIterator
 			//merge previous data stream into our core data stream of FileSystemEntities
 			observableFileSystemEntities = observableFileSystemEntities.Merge(observableFirstLevelFiles);
 
-            //Based on our stream of DirectoryInfos, project it into a stream of FileSystemEntities and merge it
-            //into our core data stream
+			//Based on our stream of DirectoryInfos, project it into a stream of FileSystemEntities and merge it
+			//into our core data stream
 			observableFileSystemEntities = observableFileSystemEntities.Merge(observableDirectories.Select(x => new FileSystemEntity(x)));
 
-            //Based on our stream of DirectoryInfos, project each stream of FileInfos into a flat stream
-            //of FileInfos, project this into a stream of FileSystemEntities and merge it into our core stream
+			//Based on our stream of DirectoryInfos, project each stream of FileInfos into a flat stream
+			//of FileInfos, project this into a stream of FileSystemEntities and merge it into our core stream
 			var observableFiles = observableDirectories.SelectMany(x => x.EnumerateFiles().ToObservable()).Select(x => new FileSystemEntity(x));
 			observableFileSystemEntities = observableFileSystemEntities.Merge(observableFiles);
 
-            //return our core data stream
+			//return our core data stream
 			return observableFileSystemEntities;
 		}
 	}
