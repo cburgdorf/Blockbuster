@@ -39,7 +39,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="CleanUpService.cs" />
+    <Compile Include="Blockbuster.cs" />
     <Compile Include="Commands\AbstractCommand.cs" />
     <Compile Include="Commands\Filtering\KeepLastMonth.cs" />
     <Compile Include="Commands\Filtering\DirectoriesOnly.cs" />

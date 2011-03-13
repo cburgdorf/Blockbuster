@@ -14,12 +14,12 @@ namespace Blockbuster
 	/// <summary>
 	/// Description of CleanUpService.
 	/// </summary>
-	public class CleanUpService : ICleaningService
+	public class Blockbuster : IBlockbuster
 	{
 		readonly List<AbstractCommand> _cleaningCommands;
 		readonly WorkManager _workManager;
 		
-		public CleanUpService()
+		public Blockbuster()
 		{
 		    _workManager = new WorkManager();
            _cleaningCommands = new List<AbstractCommand>();
