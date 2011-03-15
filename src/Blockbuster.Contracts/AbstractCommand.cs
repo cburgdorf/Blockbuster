@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Blockbuster.CommonTypes;
-using Blockbuster.Commands.Filtering;
 
-namespace Blockbuster.Commands
+namespace Blockbuster.Contracts
 {
-    public abstract class AbstractCommand : IFilter 
+    public abstract class AbstractCommand
     {
         public object AdditionalParameters { get; set; }
         

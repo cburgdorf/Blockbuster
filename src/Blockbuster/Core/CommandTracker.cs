@@ -4,36 +4,36 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Blockbuster.Commands;
-using Blockbuster.CommonTypes;
 using Blockbuster.Commands.Filtering;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Core
 {
 	public class CommandTracker
 	{  
-		private List<IFilter> Filter { get; set; }
+		private List<AbstractCommand> Commands { get; set; }
 	   
 		public CommandTracker()
 		{
-			Filter = new List<IFilter>();
+			Commands = new List<AbstractCommand>();
 		}
 
 		public void AddCommand(AbstractCommand command)
 		{
-			if (!Filter.Cast<AbstractCommand>().ToList().Exists(c => c.Name == command.Name))
+			if (!Commands.Exists(c => c.Name == command.Name))
 			{
-				Filter.Add(command);
+				Commands.Add(command);
 			}
 		}
 		
 		public void DeleteCommands()
 		{
-			Filter.Clear();
+			Commands.Clear();
 		}
 
 		public IObservable<FileSystemEntity> FilterFileSystemEntityStream(IObservable<FileSystemEntity> source) 
 		{
-			Filter.ForEach(x => source = x.FilterFileSystemEntities(source));
+			Commands.ForEach(x => source = x.FilterFileSystemEntities(source));
 			return source;
 		}       
 	}

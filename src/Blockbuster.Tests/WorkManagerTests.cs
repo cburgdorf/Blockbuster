@@ -7,10 +7,10 @@ using Rhino.Mocks;
 using System.IO;
 using System.Reactive;
 using Blockbuster.DirectoryIterator;
-using Blockbuster.CommonTypes;
 using Blockbuster.Core;
 using Blockbuster.Commands;
 using Blockbuster.Commands.Filtering;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Tests
 {

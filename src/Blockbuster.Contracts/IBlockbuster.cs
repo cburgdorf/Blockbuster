@@ -11,5 +11,6 @@ namespace Blockbuster.Contracts
 		void CleanUp(string directory);
 		void CleanUp(string directory, string commandName, object commandParams);
 		void CleanUp(string directory, Dictionary<string, object> commandList);
+        void CleanUp(string directory, IEnumerable<AbstractCommand> commands);
 	}
 }

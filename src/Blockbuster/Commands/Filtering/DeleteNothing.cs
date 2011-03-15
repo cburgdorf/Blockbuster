@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Blockbuster.CommonTypes;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Commands.Filtering
 {
     public class DeleteNothing : AbstractCommand
     {
-        public override IObservable<CommonTypes.FileSystemEntity> FilterFileSystemEntities(IObservable<CommonTypes.FileSystemEntity> source)
+        public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
             return Observable.Empty<FileSystemEntity>();
         }

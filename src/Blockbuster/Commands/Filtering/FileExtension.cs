@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Blockbuster.CommonTypes;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Commands.Filtering
 {
@@ -20,9 +20,9 @@ namespace Blockbuster.Commands.Filtering
         {
         }
 
-        public override IObservable<CommonTypes.FileSystemEntity> FilterFileSystemEntities(IObservable<CommonTypes.FileSystemEntity> source)
+        public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
-            return source.Where(x => x.Type == CommonTypes.FileSystemEntity.FileSystemEntityType.File && x.File.Extension == (string)AdditionalParameters);
+            return source.Where(x => x.Type == FileSystemEntity.FileSystemEntityType.File && x.File.Extension == (string)AdditionalParameters);
         }
     }
 }

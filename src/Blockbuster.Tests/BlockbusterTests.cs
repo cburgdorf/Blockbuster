@@ -8,6 +8,7 @@ using NUnit.Framework;
 using Blockbuster;
 using Blockbuster.Commands;
 using Blockbuster.Commands.Filtering;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Tests
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Blockbuster.CommonTypes;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Commands.Filtering
 {

@@ -40,15 +40,12 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
     <Compile Include="Blockbuster.cs" />
-    <Compile Include="Commands\AbstractCommand.cs" />
     <Compile Include="Commands\Filtering\KeepLastMonth.cs" />
     <Compile Include="Commands\Filtering\DirectoriesOnly.cs" />
     <Compile Include="Commands\Filtering\FilesOnly.cs" />
     <Compile Include="Commands\Filtering\HasDate.cs" />
     <Compile Include="Commands\Filtering\DeleteNothing.cs" />
     <Compile Include="Commands\Filtering\FileExtension.cs" />
-    <Compile Include="Commands\Filtering\IFilter.cs" />
-    <Compile Include="CommonTypes\FileSystemEntity.cs" />
     <Compile Include="Core\CommandTracker.cs" />
     <Compile Include="Core\ScrapHeaps\DummyLoggerScrapHeap.cs" />
     <Compile Include="Core\ScrapHeaps\IScrapHeap.cs" />
@@ -56,6 +53,7 @@
     <Compile Include="Core\WorkManager.cs" />
     <Compile Include="DirectoryIterator\IFileSystemIterator.cs" />
     <Compile Include="DirectoryIterator\ObservableFileAndDirectoriyIterator.cs" />
+    <Compile Include="Fluent\FluentActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

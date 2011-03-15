@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Blockbuster.CommonTypes
+namespace Blockbuster.Contracts
 {
     public class FileSystemEntity
     {

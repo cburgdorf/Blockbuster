@@ -4,7 +4,7 @@ using System.Linq;
 using Blockbuster.Commands;
 using Blockbuster.Commands.Filtering;
 using Blockbuster.DirectoryIterator;
-using Blockbuster.CommonTypes;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Core
 {

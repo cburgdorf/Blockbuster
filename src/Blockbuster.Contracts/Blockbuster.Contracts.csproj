@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractCommand.cs" />
+    <Compile Include="FileSystemEntity.cs" />
     <Compile Include="IBlockbuster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
