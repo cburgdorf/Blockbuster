@@ -13,6 +13,15 @@ AbstractCommand[] commands = { new FilesOnly(), new KeepLastMonth() };
 Blockbuster blockbuster = new Blockbuster();
 blockbuster.CleanUp(@"C:\Test", commands);
 
+However, its 2011 and everyone likes fluent APIs. So here you are:
+
+Blockbuster blockbuster = new Blockbuster();
+blockbuster
+	.WithCommand<FilesOnly>()	//Generic
+	.WithCommand(new IsNewer(DateTime.Today.AddMonth(-1))	//Object registration
+	.WithCommand(() => IsOlder(DateTime.Today.AddDays(-5))	//Func registration
+	.Cleanup(@"C:\Test");
+
 Be warned, the purpose of this project was to dive into the Reactive Extensions for .NET,
 so this is more a demo project instead of anything meant to be serious.
 
