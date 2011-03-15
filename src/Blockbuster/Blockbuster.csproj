@@ -40,6 +40,8 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
     <Compile Include="Blockbuster.cs" />
+    <Compile Include="Commands\Filtering\IsOlder.cs" />
+    <Compile Include="Commands\Filtering\IsNewer.cs" />
     <Compile Include="Commands\Filtering\KeepLastMonth.cs" />
     <Compile Include="Commands\Filtering\DirectoriesOnly.cs" />
     <Compile Include="Commands\Filtering\FilesOnly.cs" />

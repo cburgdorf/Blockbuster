@@ -13,20 +13,42 @@ namespace Blockbuster.Fluent
         {
             Commands = new List<AbstractCommand>();
         }
-
-        public FluentActivator WithCommand<T>() where T : AbstractCommand, new()
-        {
-            if (Blockbuster == null)
-                throw new InvalidOperationException("Blockbuster Instance Missing");
-
-            return WithCommand<T>(Blockbuster);
-        }
     
         public FluentActivator WithCommand<T>(IBlockbuster blockbuster) where T : AbstractCommand, new() 
         {
+            return WithCommand(blockbuster, new T());
+        }
+
+        public FluentActivator WithCommand<T>() where T : AbstractCommand, new()
+        {            
+            return WithCommand(Blockbuster, new T());
+        }
+
+        public FluentActivator WithCommand<T>(IBlockbuster blockbuster, Func<T> commandFunc) where T : AbstractCommand, new()
+        {
+            return WithCommand(blockbuster, commandFunc());
+        }
+
+        public FluentActivator WithCommand<T>(Func<T> commandFunc) where T : AbstractCommand, new()
+        {
+            return WithCommand(Blockbuster, commandFunc());
+        }
+
+        public FluentActivator WithCommand(IBlockbuster blockbuster, AbstractCommand command)
+        {
             Blockbuster = blockbuster;
-            Commands.Add(new T());
+            return WithCommand(command);
+        }
+
+        public FluentActivator WithCommand(AbstractCommand command)
+        {            
+            Commands.Add(command);
             return this;
+        }
+
+        public void CleanUp(IBlockbuster blockbuster, string directory)
+        {
+            blockbuster.CleanUp(directory, Commands);
         }
 
         public void CleanUp(string directory)
@@ -37,11 +59,6 @@ namespace Blockbuster.Fluent
             CleanUp(Blockbuster, directory);
         }
 
-        public void CleanUp(IBlockbuster blockbuster, string directory)
-        {           
-            blockbuster.CleanUp(directory, Commands);
-        }
-
         private List<AbstractCommand> Commands { get; set; }
 
         private IBlockbuster Blockbuster { get; set;}
@@ -50,6 +67,12 @@ namespace Blockbuster.Fluent
     public static class FluentExtensions
     {
         public static FluentActivator WithCommand<T>(this IBlockbuster blockbuster) where T : AbstractCommand, new()
+        {
+            FluentActivator fluentActivator = new FluentActivator();
+            return fluentActivator.WithCommand<T>(blockbuster);
+        }
+
+        public static FluentActivator WithCommand<T>(this IBlockbuster blockbuster, Func<T> commandFunc) where T : AbstractCommand, new()
         {
             FluentActivator fluentActivator = new FluentActivator();
             return fluentActivator.WithCommand<T>(blockbuster);
