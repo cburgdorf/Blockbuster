@@ -82,6 +82,17 @@ namespace Blockbuster.Tests
 				Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FileExtension>()) && List.Element(0, Property.Value("AdditionalParameters","txt")))));
 		}
 
+		[NUnit.Framework.Test]
+		public void FluentApiWithInstanceRegistrationKeepsCommandParameters()
+		{
+			var blockbuster = Rhino.Mocks.MockRepository.GenerateStub<IBlockbuster>();
+			blockbuster
+				.WithCommand(new FileExtension("txt"))
+				.CleanUp("test");
+
+			blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"),
+				Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FileExtension>()) && List.Element(0, Property.Value("AdditionalParameters", "txt")))));
+		}
     }
 }
 
