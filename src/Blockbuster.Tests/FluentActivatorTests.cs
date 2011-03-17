@@ -18,7 +18,7 @@ namespace Blockbuster.Tests
     public class FluentActivatorTests
     {
         [NUnit.Framework.Test]
-        public void FluentApiWorks()
+        public void FluentApiWithGenericRegistrationWorks()
         {
             var blockbuster = Rhino.Mocks.MockRepository.GenerateStub<IBlockbuster>();
                 blockbuster
@@ -35,8 +35,8 @@ namespace Blockbuster.Tests
         {
             var blockbuster = Rhino.Mocks.MockRepository.GenerateStub<IBlockbuster>();
             blockbuster
-                .WithCommand<FilesOnly>()
-                .WithCommand(() => new KeepLastMonth())
+				.WithCommand(() => new FilesOnly())
+				.WithCommand(() => new KeepLastMonth())				
                 .CleanUp("test");
 
             blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"),
@@ -47,14 +47,40 @@ namespace Blockbuster.Tests
         public void FluentApiWithObjectRegistrationWorks()
         {
             var blockbuster = Rhino.Mocks.MockRepository.GenerateStub<IBlockbuster>();
-            blockbuster
-                .WithCommand<FilesOnly>()
-                .WithCommand(new KeepLastMonth())
-                .CleanUp("test");
+            blockbuster            
+				.WithCommand(new FilesOnly())
+				.WithCommand(new KeepLastMonth())
+				.CleanUp("test");
 
             blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"),
                 Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FilesOnly>()) && List.Element(1, Is.TypeOf<KeepLastMonth>()))));
         }
+
+		//Might be helpful as long as the arguments differ
+		[NUnit.Framework.Test]
+		public void FluentApiKeepsDuplicateCommands()
+		{
+			var blockbuster = Rhino.Mocks.MockRepository.GenerateStub<IBlockbuster>();
+			blockbuster
+				.WithCommand<FilesOnly>()
+				.WithCommand<FilesOnly>()
+				.CleanUp("test");
+
+			blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"),
+				Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FilesOnly>()) && List.Element(1, Is.TypeOf<FilesOnly>()))));
+		}
+
+		[NUnit.Framework.Test]
+		public void FluentApiWithFuncRegistrationKeepsCommandParameters()
+		{
+			var blockbuster = Rhino.Mocks.MockRepository.GenerateStub<IBlockbuster>();
+			blockbuster
+				.WithCommand(() => new FileExtension("txt"))
+				.CleanUp("test");
+
+			blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"),
+				Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FileExtension>()) && List.Element(0, Property.Value("AdditionalParameters","txt")))));
+		}
 
     }
 }

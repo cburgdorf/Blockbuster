@@ -75,7 +75,13 @@ namespace Blockbuster.Fluent
         public static FluentActivator WithCommand<T>(this IBlockbuster blockbuster, Func<T> commandFunc) where T : AbstractCommand, new()
         {
             FluentActivator fluentActivator = new FluentActivator();
-            return fluentActivator.WithCommand<T>(blockbuster);
+			return fluentActivator.WithCommand(blockbuster, commandFunc);
         }
+
+		public static FluentActivator WithCommand(this IBlockbuster blockbuster, AbstractCommand command) 
+		{
+			FluentActivator fluentActivator = new FluentActivator();
+			return fluentActivator.WithCommand(blockbuster, command);
+		}
     }
 }
