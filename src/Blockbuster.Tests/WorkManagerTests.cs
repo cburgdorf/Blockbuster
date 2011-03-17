@@ -5,7 +5,6 @@ using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
 using System.IO;
-using System.Reactive;
 using Blockbuster.DirectoryIterator;
 using Blockbuster.Core;
 using Blockbuster.Commands;

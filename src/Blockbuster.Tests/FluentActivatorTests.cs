@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.IO;
 using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
-using System.IO;
-using System.Reactive;
 using Blockbuster.DirectoryIterator;
 using Blockbuster.Core;
 using Blockbuster.Commands;
