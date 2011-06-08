@@ -48,6 +48,7 @@
     <Compile Include="Commands\Filtering\HasDate.cs" />
     <Compile Include="Commands\Filtering\DeleteNothing.cs" />
     <Compile Include="Commands\Filtering\FileExtension.cs" />
+    <Compile Include="Commands\Filtering\KeepLastHour.cs" />
     <Compile Include="Core\CommandTracker.cs" />
     <Compile Include="Core\ScrapHeaps\DummyLoggerScrapHeap.cs" />
     <Compile Include="Core\ScrapHeaps\IScrapHeap.cs" />
