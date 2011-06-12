@@ -59,17 +59,18 @@
   <ItemGroup>
     <Compile Include="BlockbusterTests.cs" />
     <Compile Include="FluentActivatorTests.cs" />
+    <Compile Include="TestFileGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blockbuster.Contracts\Blockbuster.Contracts.csproj">
       <Project>{54849EBB-7E33-491C-B4EF-EDCCA15BEAAF}</Project>
-      <Name>Bvsn.Utilities.Cleaning.Contracts</Name>
+      <Name>Blockbuster.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Blockbuster\Blockbuster.csproj">
       <Project>{C0204A73-F058-4F14-9401-2A200C014187}</Project>
-      <Name>Bvsn.Utilities.Cleaning</Name>
+      <Name>Blockbuster</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

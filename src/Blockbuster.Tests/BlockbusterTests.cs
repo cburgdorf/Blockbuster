@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using NUnit.Framework;
 using Blockbuster;
 using Blockbuster.Commands;
@@ -15,26 +16,34 @@ namespace Blockbuster.Tests
 	[TestFixture]
 	public class BlockbusterTests
 	{
-		[Test]
+	    private string _testFilePath;
+
+        [SetUp]
+	    public void SetUp()
+	    {
+            _testFilePath = Environment.CurrentDirectory + @"\Tests";
+	    }
+
+	    [Test]
 		public void DeletesCompleteDirectory()
 		{
-			string path = @"D:\git\BlockbusterX\src\Blockbuster.Tests\bin\Debug\Tests";
-			DirectoryInfo directory = new DirectoryInfo(path);
+		    TestFileGenerator.Generate(_testFilePath, 3, 2);
+            DirectoryInfo directory = new DirectoryInfo(_testFilePath);
 			Assert.That(directory.GetFiles().Count<FileInfo>() > 0,"no testfiles present");
 			Blockbuster service = new Blockbuster();
-			service.CleanUp(path);
+			service.CleanUp(_testFilePath);
 			Assert.That(directory.GetFiles().Count<FileInfo>() == 0);
 		}
 
 		[Test]
 		public void DeletesOnlyFiles()
 		{
-			string path = @"D:\git\BlockbusterX\src\Blockbuster.Tests\bin\Debug\Tests";
-			DirectoryInfo directory = new DirectoryInfo(path);
+            TestFileGenerator.Generate(_testFilePath, 3, 2);
+            DirectoryInfo directory = new DirectoryInfo(_testFilePath);
 			Assert.That(directory.GetFiles().Count<FileInfo>() > 0, "no testfiles present");
 			AbstractCommand[] commands = { new FilesOnly() };
 			Blockbuster service = new Blockbuster();
-			service.CleanUp(path, commands);
+			service.CleanUp(_testFilePath, commands);
 			Assert.That(directory.GetFiles().Count<FileInfo>() == 0);
 		}
 	}   
