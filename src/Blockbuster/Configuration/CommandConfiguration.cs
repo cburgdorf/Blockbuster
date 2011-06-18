@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Blockbuster.Contracts;
 
 namespace Blockbuster.Configuration
 {
-    public class CommandConfiguration
+    public class DynamicCommandConfiguration : IDynamicCommandConfiguration
     {
-        public CommandConfiguration(string configurationString)
+        public DynamicCommandConfiguration(string configurationString)
         {
             Configuration = ParseString(configurationString);
         }

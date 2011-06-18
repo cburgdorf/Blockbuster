@@ -18,7 +18,7 @@ namespace Blockbuster.Configuration
 							},
 						   (previous, x) =>
 							   {
-								   var commandConfiguration = new CommandConfiguration(x);
+								   var commandConfiguration = new DynamicCommandConfiguration(x);
 								   var configuration = commandConfiguration.Configuration;
 								   if (configuration.ContainsKey("directory") && configuration.ContainsKey("commandname"))
 								   {

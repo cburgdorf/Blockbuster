@@ -14,7 +14,7 @@ namespace Blockbuster.Tests
         public void ReturnsEmptyDictionaryForEmptyString()
         {
             var configurationString = "";
-            var commandConfiguration = new CommandConfiguration(configurationString);
+            var commandConfiguration = new DynamicCommandConfiguration(configurationString);
             Assert.IsNotNull(commandConfiguration.Configuration, "Dictonary expected, but is null");
         }
 
@@ -22,7 +22,7 @@ namespace Blockbuster.Tests
         public void SplitsFragmentsWithApostrophs()
         {
             var configurationString = "CommandName='FilesOnly'; Directory='C:\\Test\\'";
-            var commandConfiguration = new CommandConfiguration(configurationString);
+            var commandConfiguration = new DynamicCommandConfiguration(configurationString);
             Assert.That(commandConfiguration.Configuration.ContainsKey("commandname"), "Missing Key: filesonly");
             Assert.That(commandConfiguration.Configuration.ContainsKey("directory"), "Missing Key: directory");
             Assert.AreEqual("filesonly", commandConfiguration.Configuration["commandname"], "Wrong Command Name");
@@ -33,7 +33,7 @@ namespace Blockbuster.Tests
         public void SplitsFragmentsWithApostrophsAndThreeItems()
         {
             var configurationString = "CommandName='FileExtension'; Directory='C:\\Test\\'; FileExtension='txt'";
-            var commandConfiguration = new CommandConfiguration(configurationString);
+            var commandConfiguration = new DynamicCommandConfiguration(configurationString);
             Assert.That(commandConfiguration.Configuration.ContainsKey("commandname"), "Missing Key: fileextension");
             Assert.That(commandConfiguration.Configuration.ContainsKey("directory"), "Missing Key: directory");
             Assert.That(commandConfiguration.Configuration.ContainsKey("fileextension"), "Missing Key: fileextension");
@@ -46,7 +46,7 @@ namespace Blockbuster.Tests
         public void SplitsFragmentsWithoutApostrophs()
         {
             var configurationString = "CommandName=FilesOnly; Directory=C:\\Test\\";
-            var commandConfiguration = new CommandConfiguration(configurationString);
+            var commandConfiguration = new DynamicCommandConfiguration(configurationString);
             Assert.That(commandConfiguration.Configuration.ContainsKey("commandname"), "Missing Key: filesonly");
             Assert.That(commandConfiguration.Configuration.ContainsKey("directory"), "Missing Key: directory");
             Assert.AreEqual("filesonly", commandConfiguration.Configuration["commandname"], "Wrong Command Name");
@@ -57,7 +57,7 @@ namespace Blockbuster.Tests
         public void SplitsFragmentsWithoutSpacings()
         {
             var configurationString = "CommandName= FilesOnly ; Directory= C:\\Test\\ ";
-            var commandConfiguration = new CommandConfiguration(configurationString);
+            var commandConfiguration = new DynamicCommandConfiguration(configurationString);
             Assert.That(commandConfiguration.Configuration.ContainsKey("commandname"), "Missing Key: filesonly");
             Assert.That(commandConfiguration.Configuration.ContainsKey("directory"), "Missing Key: directory");
             Assert.AreEqual("filesonly", commandConfiguration.Configuration["commandname"], "Wrong Command Name");

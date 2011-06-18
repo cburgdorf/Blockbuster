@@ -53,7 +53,7 @@
     <Compile Include="FileSystemEntity.cs" />
     <Compile Include="IBlockbuster.cs" />
     <Compile Include="ICommandActivator.cs" />
-    <Compile Include="IConfigureable.cs" />
+    <Compile Include="IDynamicConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>

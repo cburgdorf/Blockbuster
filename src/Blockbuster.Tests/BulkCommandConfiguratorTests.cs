@@ -65,7 +65,6 @@ namespace Blockbuster.Tests
             Assert.AreEqual("pdf", invocationInfoSecond.Value[0].Configuration["fileextension"]);
             Assert.That(invocationInfoSecond.Value[0].Configuration.Count == 1, "Contains uncorrect number of configuration properties");
         
-        
         }
     }
 }
