@@ -15,18 +15,11 @@ namespace Blockbuster.Commands.Filtering
             _predicate = predicate;
         }
 
-        public override Dictionary<string, object> Configuration
+        public override void Configure(Dictionary<string, object> value)
         {
-            get
-            {
-                return base.Configuration;
-            }
-            set
-            {
-                base.Configuration = value;
-                if (value.ContainsKey("HasDate"))
-                    _predicate = x => x == (DateTime)value["HasDate"];
-            }
+            base.Configure(value);
+            if (value.ContainsKey("HasDate"))
+                _predicate = x => x == (DateTime) value["HasDate"];
         }
 
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)

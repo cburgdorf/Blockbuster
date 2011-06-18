@@ -15,18 +15,11 @@ namespace Blockbuster.Commands.Filtering
             _dateTime = dateTime;
         }
 
-        public override Dictionary<string, object> Configuration
+        public override void Configure(Dictionary<string, object> value)
         {
-            get
-            {
-                return base.Configuration;
-            }
-            set
-            {
-                base.Configuration = value;
-                if (value.ContainsKey("IsNewer"))
-                    _dateTime = (DateTime) value["IsNewer"];
-            }
+            base.Configure(value);
+            if (value.ContainsKey("IsNewer"))
+                _dateTime = (DateTime) value["IsNewer"];
         }
 
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)

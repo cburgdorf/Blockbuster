@@ -46,7 +46,7 @@ namespace Blockbuster
 			//Find Command
 			AbstractCommand command = FindCommand(commandName);
 			//Set (optional) additional command parameter
-			command.Configuration = commandConfiguration;
+			command.Configure(commandConfiguration);
 			CleanUp(directory, new List<AbstractCommand>() { command });
 		}
 
@@ -71,7 +71,7 @@ namespace Blockbuster
 				AbstractCommand command = FindCommand(kvp.Key);
 				if (command != null && kvp.Value != null)
 				{
-					command.Configuration = kvp.Value;
+					command.Configure(kvp.Value);
 					commands.Add(command);
 				}
 			}

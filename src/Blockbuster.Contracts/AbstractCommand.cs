@@ -8,14 +8,10 @@ namespace Blockbuster.Contracts
 {
     public abstract class AbstractCommand
     {
-        private Dictionary<string, object> _configuration;
-        
-        public virtual Dictionary<string, object> Configuration
+        public virtual void Configure(Dictionary<string, object> value)
         {
-            get { return _configuration; }
-            set { _configuration = value; }
         }
-        
+
         public void Initialize()
         {
             if (string.IsNullOrEmpty(Name))
