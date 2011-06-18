@@ -10,7 +10,7 @@ namespace Blockbuster.Configuration
 {
     public class XmlConfigurationReader : IDynamicConfiguration
     {
-        public IEnumerable<IDynamicCommandConfiguration> GetCommandConfigurations()
+        public IEnumerable<string> GetCommandConfigurations()
         {
             var section = (NameValueCollection)ConfigurationManager.GetSection("CleanUpTasks");
 
@@ -21,7 +21,7 @@ namespace Blockbuster.Configuration
                 if (values == null || values.Length == 0)
                     continue;
 
-                yield return new DynamicCommandConfiguration(values[0]);
+                yield return values[0];
             }
         }
     }

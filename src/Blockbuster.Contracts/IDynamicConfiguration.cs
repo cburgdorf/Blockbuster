@@ -12,6 +12,6 @@ namespace Blockbuster.Contracts
 
     public interface IDynamicConfiguration
     {
-        IEnumerable<IDynamicCommandConfiguration> GetCommandConfigurations();
+        IEnumerable<string> GetCommandConfigurations();
     }
 }
