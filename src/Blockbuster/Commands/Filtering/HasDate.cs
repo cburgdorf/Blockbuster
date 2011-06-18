@@ -15,6 +15,20 @@ namespace Blockbuster.Commands.Filtering
             _predicate = predicate;
         }
 
+        public override Dictionary<string, object> Configuration
+        {
+            get
+            {
+                return base.Configuration;
+            }
+            set
+            {
+                base.Configuration = value;
+                if (value.ContainsKey("HasDate"))
+                    _predicate = x => x == (DateTime)value["HasDate"];
+            }
+        }
+
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
             return source.Where(x => _predicate(x.CreationTime) );

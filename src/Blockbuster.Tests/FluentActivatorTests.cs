@@ -79,7 +79,7 @@ namespace Blockbuster.Tests
 				.CleanUp("test");
 
 			blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"),
-				Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FileExtension>()) && List.Element(0, Property.Value("AdditionalParameters","txt")))));
+                Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FileExtension>()) && List.Element(0, Property.Value("ExtensionOfFile", "txt")))));
 		}
 
 		[NUnit.Framework.Test]
@@ -90,8 +90,8 @@ namespace Blockbuster.Tests
 				.WithCommand(new FileExtension("txt"))
 				.CleanUp("test");
 
-			blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"),
-				Arg<IEnumerable<AbstractCommand>>.Matches(List.Element(0, Is.TypeOf<FileExtension>()) && List.Element(0, Property.Value("AdditionalParameters", "txt")))));
+
+            blockbuster.AssertWasCalled(x => x.CleanUp(Arg<string>.Is.Equal("test"), Arg<IEnumerable<AbstractCommand>>.Matches(y => ((FileExtension)y.ToList()[0]).ExtensionOfFile == "txt")));
 		}
     }
 }

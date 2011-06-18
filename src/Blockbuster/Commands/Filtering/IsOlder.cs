@@ -15,6 +15,20 @@ namespace Blockbuster.Commands.Filtering
             _dateTime = dateTime;
         }
 
+        public override Dictionary<string, object> Configuration
+        {
+            get
+            {
+                return base.Configuration;
+            }
+            set
+            {
+                base.Configuration = value;
+                if (value.ContainsKey("IsOlder"))
+                    _dateTime = (DateTime) value["IsOlder"];
+            }
+        }
+
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
             return source.Where(x => x.CreationTime < _dateTime);

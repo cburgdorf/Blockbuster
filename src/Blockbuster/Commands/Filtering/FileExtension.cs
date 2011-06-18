@@ -11,18 +11,34 @@ namespace Blockbuster.Commands.Filtering
     {
         public override string Name { get { return "FileExtension"; } }
 
-        public FileExtension(string fileExtension) 
+        public string ExtensionOfFile { get; protected set; }
+
+        public FileExtension(string fileExtension)
         {
-            AdditionalParameters = fileExtension;
+            ExtensionOfFile = fileExtension;
         }
 
         public FileExtension()
         {
         }
 
+        public override System.Collections.Generic.Dictionary<string, object> Configuration
+        {
+            get
+            {
+                return base.Configuration;
+            }
+            set
+            {
+                base.Configuration = value;
+                if (value.ContainsKey("FileExtension"))
+                    ExtensionOfFile = (string)value["FileExtension"];
+            }
+        }
+
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
-            return source.Where(x => x.Type == FileSystemEntity.FileSystemEntityType.File && x.File.Extension == (string)AdditionalParameters);
+            return source.Where(x => x.Type == FileSystemEntity.FileSystemEntityType.File && x.File.Extension == ExtensionOfFile);
         }
     }
 }

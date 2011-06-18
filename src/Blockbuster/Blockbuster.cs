@@ -35,29 +35,31 @@ namespace Blockbuster
 			CleanUp(directory, Enumerable.Empty<AbstractCommand>());
 		}
 
-		/// <summary>
-		/// This Overload is useful for command line invoking with a single command
-		/// </summary>
-		/// <param name="directory">Directory to delete</param>
-		/// <param name="commandName">Command name</param>
-		/// <param name="commandParams">Optional parameters for the command</param>
-		public void CleanUp(string directory, string commandName, object commandParams)
+	    /// <summary>
+	    /// This Overload is useful for command line invoking with a single command
+	    /// </summary>
+	    /// <param name="directory">Directory to delete</param>
+	    /// <param name="commandName">Command name</param>
+	    /// <param name="commandConfiguration">Optional parameters for the command</param>
+	    public void CleanUp(string directory, string commandName, Dictionary<string, object> commandConfiguration)
 		{           
 			//Find Command
 			AbstractCommand command = FindCommand(commandName);
-			//Set (optional) additional command prameter
-			command.AdditionalParameters = commandParams;
+			//Set (optional) additional command parameter
+			command.Configuration = commandConfiguration;
 			CleanUp(directory, new List<AbstractCommand>() { command });
 		}
 
-		/// <summary>
-		/// This overload is useful for command line invoking 
-		/// e.g. (blockbuster.exe -d="C:\Test" -FilesOnly -FileExtension="txt")
-		/// </summary>
-		/// <param name="Root directory where the cleanup should happen"></param>
-		/// <param name="A string based list of commands and some additional command data 
-		/// (e.g. -FileExtension='txt'"></param>
-		public void CleanUp(string directory, Dictionary<string,object> commandList)
+	    /// <summary>
+	    /// This overload is useful for command line invoking 
+	    /// e.g. (blockbuster.exe -d="C:\Test" -FilesOnly -FileExtension="txt")
+	    /// </summary>
+	    /// <param name="directory"></param>
+	    /// <param name="commandList"></param>
+	    /// <param name="Root directory where the cleanup should happen"></param>
+	    /// <param name="A string based list of commands and some additional command data 
+	    /// (e.g. -FileExtension='txt'"></param>
+	    public void CleanUp(string directory, Dictionary<string, Dictionary<string, object>> commandList)
 		{
 			//temporary command list
 			List<AbstractCommand> commands = new List<AbstractCommand>();
@@ -69,7 +71,7 @@ namespace Blockbuster
 				AbstractCommand command = FindCommand(kvp.Key);
 				if (command != null && kvp.Value != null)
 				{
-					command.AdditionalParameters = kvp.Value;
+					command.Configuration = kvp.Value;
 					commands.Add(command);
 				}
 			}
