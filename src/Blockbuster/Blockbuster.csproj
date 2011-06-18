@@ -49,6 +49,8 @@
     <Compile Include="Commands\Filtering\DeleteNothing.cs" />
     <Compile Include="Commands\Filtering\FileExtension.cs" />
     <Compile Include="Commands\Filtering\KeepLastHour.cs" />
+    <Compile Include="Configuration\BulkCommandConfigurator.cs" />
+    <Compile Include="Configuration\CommandConfiguration.cs" />
     <Compile Include="Core\CommandTracker.cs" />
     <Compile Include="Core\ScrapHeaps\DummyLoggerScrapHeap.cs" />
     <Compile Include="Core\ScrapHeaps\IScrapHeap.cs" />
@@ -77,6 +79,7 @@
       <Name>Blockbuster.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <PostBuildEvent>copy *.dll ..\..\..\..\builds</PostBuildEvent>
   </PropertyGroup>
