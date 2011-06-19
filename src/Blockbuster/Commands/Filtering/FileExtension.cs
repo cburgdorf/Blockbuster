@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Blockbuster.Contracts;
 
@@ -11,18 +12,26 @@ namespace Blockbuster.Commands.Filtering
     {
         public override string Name { get { return "FileExtension"; } }
 
-        public FileExtension(string fileExtension) 
+        public string ExtensionOfFile { get; protected set; }
+
+        public FileExtension(string fileExtension)
         {
-            AdditionalParameters = fileExtension;
+            ExtensionOfFile = fileExtension;
         }
 
         public FileExtension()
         {
         }
 
+        public override void Configure(Dictionary<string, string> value)
+        {
+            if (value.ContainsKey("fileextension"))
+                ExtensionOfFile = value["fileextension"];
+        }
+
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
-            return source.Where(x => x.Type == FileSystemEntity.FileSystemEntityType.File && x.File.Extension == (string)AdditionalParameters);
+            return source.Where(x => x.Type == FileSystemEntity.FileSystemEntityType.File && (x.File.Extension.ToLower() == ExtensionOfFile.ToLower() || x.File.Extension.ToLower() == string.Format(".{0}",ExtensionOfFile.ToLower())));
         }
     }
 }

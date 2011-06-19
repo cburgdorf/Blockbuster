@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Tests", "Blockb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Tests.TestFileGenerator", "Blockbuster.Tests.TestFileGenerator\Blockbuster.Tests.TestFileGenerator.csproj", "{79A98D36-9493-4EB8-9803-B696986BBD75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Clients.TaskManager", "Blockbuster.Clients.TaskManager\Blockbuster.Clients.TaskManager.csproj", "{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,16 @@ Global
 		{79A98D36-9493-4EB8-9803-B696986BBD75}.Release|Mixed Platforms.Build.0 = Release|x86
 		{79A98D36-9493-4EB8-9803-B696986BBD75}.Release|x86.ActiveCfg = Release|x86
 		{79A98D36-9493-4EB8-9803-B696986BBD75}.Release|x86.Build.0 = Release|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Debug|x86.ActiveCfg = Debug|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Debug|x86.Build.0 = Debug|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Release|Any CPU.ActiveCfg = Release|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Release|x86.ActiveCfg = Release|x86
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +82,6 @@ Global
 		{54849EBB-7E33-491C-B4EF-EDCCA15BEAAF} = {26F61A9E-8B1A-467F-86C2-33F6D195CEEF}
 		{9D9D360D-0245-4634-A050-C44A519D164E} = {26F61A9E-8B1A-467F-86C2-33F6D195CEEF}
 		{79A98D36-9493-4EB8-9803-B696986BBD75} = {26F61A9E-8B1A-467F-86C2-33F6D195CEEF}
+		{8C7C3DFA-796B-424E-B78E-1C35B1D4B146} = {26F61A9E-8B1A-467F-86C2-33F6D195CEEF}
 	EndGlobalSection
 EndGlobal

@@ -10,14 +10,27 @@ namespace Blockbuster.Commands.Filtering
     {
         DateTime _dateTime;
 
+        public IsNewer()
+        {
+        }
+
         public IsNewer(DateTime dateTime) 
         {
             _dateTime = dateTime;
         }
 
+        public override void Configure(Dictionary<string, string> value)
+        {
+            if (value.ContainsKey("isnewer"))
+                _dateTime = DateTime.Parse(value["isnewer"]);
+        }
+
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
-            return source.Where(x => x.CreationTime > _dateTime);
+            return source.Where(x =>
+                                    {
+                                        return x.CreationTime > _dateTime;
+                                    });
         }
 
         public override string Name

@@ -6,10 +6,12 @@ using System.IO;
 
 namespace Blockbuster.Contracts
 {
-    public abstract class AbstractCommand
+    public abstract class AbstractCommand : IConfigureable
     {
-        public object AdditionalParameters { get; set; }
-        
+        public virtual void Configure(Dictionary<string, string> value)
+        {
+        }
+
         public void Initialize()
         {
             if (string.IsNullOrEmpty(Name))
