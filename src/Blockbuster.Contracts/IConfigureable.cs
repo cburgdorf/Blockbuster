@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Blockbuster.Contracts
 {
-    interface IConfigureable
-    {
-        void Configure(Dictionary<string, string> configuration);
-    }
+	interface IConfigureable
+	{
+		void Configure(Dictionary<string, string> configuration);
+	}
 }

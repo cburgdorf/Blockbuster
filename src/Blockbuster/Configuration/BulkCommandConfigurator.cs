@@ -22,13 +22,13 @@ namespace Blockbuster.Configuration
 								   var configuration = commandConfiguration.Configuration;
 								   if (configuration.ContainsKey("directory") && configuration.ContainsKey("commandname"))
 								   {
-								       var cachedCommandDirectory = configuration["directory"];
-                                       var cachedCommandName = configuration["commandname"];
-                                       
-                                       if(!previous.InvocationInfos.ContainsKey(cachedCommandDirectory))
+									   var cachedCommandDirectory = configuration["directory"];
+									   var cachedCommandName = configuration["commandname"];
+									   
+									   if(!previous.InvocationInfos.ContainsKey(cachedCommandDirectory))
 										   previous.InvocationInfos.Add(cachedCommandDirectory,new List<CommandInvocationInfo>());
 
-								       configuration.Remove("commandname");
+									   configuration.Remove("commandname");
 									   configuration.Remove("directory");
 									   previous.InvocationInfos[cachedCommandDirectory].Add(new CommandInvocationInfo
 																								 {

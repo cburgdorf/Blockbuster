@@ -16,19 +16,19 @@ namespace Blockbuster.Tests
 	[TestFixture]
 	public class BlockbusterTests
 	{
-	    private string _testFilePath;
+		private string _testFilePath;
 
-        [SetUp]
-	    public void SetUp()
-	    {
-            _testFilePath = Environment.CurrentDirectory + @"\Tests";
-	    }
+		[SetUp]
+		public void SetUp()
+		{
+			_testFilePath = Environment.CurrentDirectory + @"\Tests";
+		}
 
-	    [Test]
+		[Test]
 		public void DeletesCompleteDirectory()
 		{
-		    TestFileGenerator.Generate(_testFilePath, 3, 2);
-            DirectoryInfo directory = new DirectoryInfo(_testFilePath);
+			TestFileGenerator.Generate(_testFilePath, 3, 2);
+			DirectoryInfo directory = new DirectoryInfo(_testFilePath);
 			Assert.That(directory.GetFiles().Count<FileInfo>() > 0,"no testfiles present");
 			Blockbuster service = new Blockbuster();
 			service.CleanUp(_testFilePath);
@@ -38,8 +38,8 @@ namespace Blockbuster.Tests
 		[Test]
 		public void DeletesOnlyFiles()
 		{
-            TestFileGenerator.Generate(_testFilePath, 3, 2);
-            DirectoryInfo directory = new DirectoryInfo(_testFilePath);
+			TestFileGenerator.Generate(_testFilePath, 3, 2);
+			DirectoryInfo directory = new DirectoryInfo(_testFilePath);
 			Assert.That(directory.GetFiles().Count<FileInfo>() > 0, "no testfiles present");
 			AbstractCommand[] commands = { new FilesOnly() };
 			Blockbuster service = new Blockbuster();
