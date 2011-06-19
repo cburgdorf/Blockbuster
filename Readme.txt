@@ -39,7 +39,7 @@ Here is a little XML snippet that shows how to chain some commands via XML:
   <CleanUpTasks>
     <add key="Command1" value="CommandName='FilesOnly'; Directory = 'C:\Test'"/>
     <add key="Command2" value="CommandName='IsOlder'; Directory = 'C:\Test'; IsOlder='2011-05-05'"/>
-    <add key="Command2" value="CommandName='FileExtension'; Directory = 'C:\Test'; FileExtension='log'"/>
+    <add key="Command3" value="CommandName='FileExtension'; Directory = 'C:\Test'; FileExtension='log'"/>
   </CleanUpTasks>
   <startup>
     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
