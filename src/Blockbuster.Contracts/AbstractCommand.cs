@@ -8,7 +8,7 @@ namespace Blockbuster.Contracts
 {
     public abstract class AbstractCommand : IConfigureable
     {
-        public virtual void Configure(Dictionary<string, object> value)
+        public virtual void Configure(Dictionary<string, string> value)
         {
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Blockbuster.Configuration;
 using Blockbuster.Contracts;
 using Blockbuster.Core;
 using Blockbuster.Commands;
@@ -16,13 +17,11 @@ namespace Blockbuster
 	/// </summary>
 	public class Blockbuster : IBlockbuster
 	{
-		readonly List<AbstractCommand> _cleaningCommands;
-		readonly WorkManager _workManager;
+		readonly List<AbstractCommand> _availableCommands;
 		
 		public Blockbuster()
 		{
-			_workManager = new WorkManager();
-		   _cleaningCommands = new List<AbstractCommand>();
+		   _availableCommands = new List<AbstractCommand>();
 		   RegisterCommands();
 		}
 
@@ -41,7 +40,7 @@ namespace Blockbuster
 	    /// <param name="directory">Directory to delete</param>
 	    /// <param name="commandName">Command name</param>
 	    /// <param name="commandConfiguration">Optional parameters for the command</param>
-	    public void CleanUp(string directory, string commandName, Dictionary<string, object> commandConfiguration)
+	    public void CleanUp(string directory, string commandName, Dictionary<string, string> commandConfiguration)
 		{           
 			//Find Command
 			AbstractCommand command = FindCommand(commandName);
@@ -59,10 +58,10 @@ namespace Blockbuster
 	    /// <param name="Root directory where the cleanup should happen"></param>
 	    /// <param name="A string based list of commands and some additional command data 
 	    /// (e.g. -FileExtension='txt'"></param>
-	    public void CleanUp(string directory, Dictionary<string, Dictionary<string, object>> commandList)
+	    public void CleanUp(string directory, Dictionary<string, Dictionary<string, string>> commandList)
 		{
 			//temporary command list
-			List<AbstractCommand> commands = new List<AbstractCommand>();
+			var commands = new List<AbstractCommand>();
 
 			//Lookup each command, set additional parameters and add it to the temporary command list
 			foreach (var kvp in commandList)
@@ -79,7 +78,23 @@ namespace Blockbuster
 			CleanUp(directory, commands);
 		}
 		
-		/// <summary>
+        public void CleanUp(IDynamicConfiguration configuration, bool raiseExceptionsOnConfigErrors)
+        {
+            var bulkCommandConfigurator = new BulkCommandConfigurator();
+            var bulkCommandInvocationInfo =  bulkCommandConfigurator.ParseCommandStrings(configuration.GetCommandConfigurations());
+
+            foreach (var invocationInfo in bulkCommandInvocationInfo.InvocationInfos)
+            {
+                CleanUp(invocationInfo.Key, invocationInfo.Value.ToDictionary(x => x.CommandName, x => x.Configuration));
+            }
+
+            if (raiseExceptionsOnConfigErrors && bulkCommandInvocationInfo.AdditionalInfo.Any())
+            {
+                throw new InvalidOperationException(bulkCommandInvocationInfo.AdditionalInfo.Aggregate(string.Empty, (x,y) => x + y));
+            }
+        }
+
+	    /// <summary>
 		/// This overload is useful if you take care of the command instantiation yourself
 		/// (e.g. when you use the Blockbuster API inside your own application)
 		/// </summary>
@@ -87,12 +102,13 @@ namespace Blockbuster
 		/// <param name="commands">The list of commands to be used for the cleanup</param>
 		public void CleanUp(string directory, IEnumerable<AbstractCommand> commands)
 		{
-			_workManager.Delete(directory, commands);
+		    var workManager = new WorkManager();
+			workManager.Delete(directory, commands);
 		}
 
 		private AbstractCommand FindCommand(string command)
 		{
-			AbstractCommand currentCommand = _cleaningCommands.FirstOrDefault(c => c.Name.ToLower() == command.ToLower());
+			AbstractCommand currentCommand = _availableCommands.FirstOrDefault(c => c.Name.ToLower() == command.ToLower());
 			if (currentCommand != null)
 				return currentCommand;
 			else
@@ -111,7 +127,7 @@ namespace Blockbuster
 					try
 					{
 						AbstractCommand currentCommand = (AbstractCommand)assembly.CreateInstance(type.ToString());
-						_cleaningCommands.Add(currentCommand);
+						_availableCommands.Add(currentCommand);
 					}
 					catch 
 					{
