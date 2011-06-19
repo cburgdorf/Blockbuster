@@ -11,7 +11,23 @@ namespace Blockbuster.Clients.TaskManager
         static void Main(string[] args)
         {
             var blockbuster = new Blockbuster();
-            blockbuster.CleanUp(new XmlConfigurationReader(), true);
+            try
+            {
+                blockbuster.CleanUp(new XmlConfigurationReader(), IsDebug(args));
+            }
+            catch (Exception e)
+            {
+                if (IsDebug(args))
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
+        }
+
+        private static bool IsDebug(string[] args)
+        {
+            return args.Length > 0 && args[0] == "-debug";
         }
     }
 }

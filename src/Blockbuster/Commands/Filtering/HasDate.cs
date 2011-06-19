@@ -10,6 +10,10 @@ namespace Blockbuster.Commands.Filtering
     {
         Func<DateTime, bool> _predicate;
 
+        public HasDate()
+        {
+        }
+
         public HasDate(Func<DateTime, bool> predicate) 
         {
             _predicate = predicate;

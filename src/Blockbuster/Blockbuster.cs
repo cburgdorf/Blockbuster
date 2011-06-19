@@ -78,6 +78,13 @@ namespace Blockbuster
 			CleanUp(directory, commands);
 		}
 		
+        /// <summary>
+        /// This overload is quite flexible because it takes in an IDynamicConfiguration which can represent
+        /// an XML File or a database containing the commands. It also supports command chaining.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="raiseExceptionsOnConfigErrors"></param>
+
         public void CleanUp(IDynamicConfiguration configuration, bool raiseExceptionsOnConfigErrors)
         {
             var bulkCommandConfigurator = new BulkCommandConfigurator();

@@ -10,6 +10,10 @@ namespace Blockbuster.Commands.Filtering
     {
         DateTime _dateTime;
 
+        public IsOlder()
+        {
+        }
+
         public IsOlder(DateTime dateTime)
         {
             _dateTime = dateTime;
@@ -23,7 +27,10 @@ namespace Blockbuster.Commands.Filtering
 
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
-            return source.Where(x => x.CreationTime < _dateTime);
+            return source.Where(x =>
+                                    {
+                                        return x.CreationTime < _dateTime;
+                                    });
         }
 
         public override string Name
