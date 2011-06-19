@@ -31,7 +31,7 @@ namespace Blockbuster.Commands.Filtering
 
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)
         {
-            return source.Where(x => x.Type == FileSystemEntity.FileSystemEntityType.File && x.File.Extension == ExtensionOfFile);
+            return source.Where(x => x.Type == FileSystemEntity.FileSystemEntityType.File && (x.File.Extension == ExtensionOfFile || x.File.Extension == string.Format(".{0}",ExtensionOfFile)));
         }
     }
 }

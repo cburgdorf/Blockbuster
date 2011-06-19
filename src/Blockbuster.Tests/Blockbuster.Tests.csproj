@@ -60,6 +60,7 @@
     <Compile Include="BlockbusterTests.cs" />
     <Compile Include="CommandConfigurationTests.cs" />
     <Compile Include="BulkCommandConfiguratorTests.cs" />
+    <Compile Include="BlockbusterDynamicConfigurationIntegrationTests.cs" />
     <Compile Include="FluentActivatorTests.cs" />
     <Compile Include="TestFileGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
