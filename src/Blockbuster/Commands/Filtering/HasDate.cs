@@ -17,9 +17,8 @@ namespace Blockbuster.Commands.Filtering
 
         public override void Configure(Dictionary<string, string> value)
         {
-            //base.Configure(value);
-            //if (value.ContainsKey("HasDate"))
-            //    _predicate = x => x == (DateTime) value["HasDate"];
+            if (value.ContainsKey("hasdate"))
+                _predicate = x => x == DateTime.Parse(value["hasdate"]);
         }
 
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)

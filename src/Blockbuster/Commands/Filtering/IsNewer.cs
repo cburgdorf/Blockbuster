@@ -17,9 +17,8 @@ namespace Blockbuster.Commands.Filtering
 
         public override void Configure(Dictionary<string, string> value)
         {
-            //base.Configure(value);
-            //if (value.ContainsKey("IsNewer"))
-            //    _dateTime = (DateTime) value["IsNewer"];
+            if (value.ContainsKey("isnewer"))
+                _dateTime = DateTime.Parse(value["isnewer"]);
         }
 
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)

@@ -25,9 +25,8 @@ namespace Blockbuster.Commands.Filtering
 
         public override void Configure(Dictionary<string, string> value)
         {
-            //base.Configure(value);
-            //if (value.ContainsKey("FileExtension"))
-            //    ExtensionOfFile = (string) value["FileExtension"];
+            if (value.ContainsKey("fileextension"))
+                ExtensionOfFile = value["fileextension"];
         }
 
         public override IObservable<FileSystemEntity> FilterFileSystemEntities(IObservable<FileSystemEntity> source)

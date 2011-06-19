@@ -90,7 +90,7 @@ namespace Blockbuster
 
             if (raiseExceptionsOnConfigErrors && bulkCommandInvocationInfo.AdditionalInfo.Any())
             {
-                throw new InvalidOperationException(bulkCommandInvocationInfo.AdditionalInfo.Aggregate(string.Empty, (x,y) => x + y));
+                throw new InvalidOperationException(bulkCommandInvocationInfo.AdditionalInfo.Aggregate(string.Empty, (x,y) => x + Environment.NewLine + y));
             }
         }
 
