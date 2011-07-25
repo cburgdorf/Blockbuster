@@ -25,7 +25,7 @@ blockbuster
 
 
 There is also an API for a dynamic configuraton (e.g. XML, Database etc.). You don't even need
-to use the library at all if you just want to configure a plant task and throw together
+to use the library at all if you just want to configure a planned task and throw together
 a bunch of useful commands. Use can use the TaskRunner.exe which is a little Console App that can
 be configured via XML (see: Blockbuster.Clients.TaskManager.exe.config).
 
