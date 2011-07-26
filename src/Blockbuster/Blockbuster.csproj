@@ -59,6 +59,7 @@
     <Compile Include="Core\WorkManager.cs" />
     <Compile Include="DirectoryIterator\IFileSystemIterator.cs" />
     <Compile Include="DirectoryIterator\ObservableFileAndDirectoriyIterator.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Fluent\FluentActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
